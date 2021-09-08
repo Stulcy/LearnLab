@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 // 🌎 Project imports:
@@ -30,6 +31,10 @@ class DatabaseService {
       if (updateActivity) {
         await user.update({'lastActivity': DateTime.now()}).catchError(
             (error) => print('Failed to update lastActivity: $error'));
+        final String token = await FirebaseMessaging.instance.getToken();
+        if (token != null) {
+          await user.update({'token': token});
+        }
       }
 
       // Get the avatar
