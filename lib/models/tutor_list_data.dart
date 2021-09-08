@@ -21,7 +21,7 @@ class TutorListData {
           uid: json['uid'] as String,
           firstName: json['firstName'] as String,
           lastName: json['lastName'] as String,
-          courses: (json['courses'] as Map<String, dynamic>)
+          courses: (json['courses'] as Map<String, dynamic> ?? {})
               .map((key, value) => MapEntry(key, value.toString())),
         );
 

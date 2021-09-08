@@ -9,6 +9,7 @@ import 'package:learnlab/shared/adder.dart';
 import 'package:learnlab/shared/constants.dart';
 import 'package:learnlab/services/database.dart';
 import 'package:learnlab/shared/loading.dart';
+import 'package:learnlab/shared/pop_up.dart';
 import 'package:provider/provider.dart';
 
 class UserTutorsBody extends StatelessWidget {
@@ -40,6 +41,18 @@ class UserTutorsBody extends StatelessWidget {
               child: Text(
                 'Need help? Go on, select a tutor.',
                 style: textTextStyle.copyWith(fontSize: 18),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            SizedBox(
+              width: screenWidth * 0.5,
+              child: Text(
+                'Note: Added tutors will be able to see your exams and courses.',
+                style: textTextStyle.copyWith(
+                    fontSize: 18, color: ColorTheme.textLightGray),
                 textAlign: TextAlign.center,
               ),
             ),
