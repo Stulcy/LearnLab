@@ -44,3 +44,6 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Notifications script NodeJS
+/notifications_sender/node_modules
