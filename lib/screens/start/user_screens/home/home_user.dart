@@ -11,11 +11,16 @@ import 'package:learnlab/shared/constants.dart';
 import 'package:learnlab/shared/quotes.dart';
 import 'package:provider/provider.dart';
 
-class UserHomeBody extends StatelessWidget {
+class UserHomeBody extends StatefulWidget {
   final UserData user;
 
   const UserHomeBody({this.user});
 
+  @override
+  State<UserHomeBody> createState() => _UserHomeBodyState();
+}
+
+class _UserHomeBodyState extends State<UserHomeBody> {
   @override
   Widget build(BuildContext context) {
     final HomeData homePageData = Provider.of<HomeData>(context);
@@ -40,16 +45,23 @@ class UserHomeBody extends StatelessWidget {
       SizedBox(
         height: 10,
       ),
-      ...homePageData.notifications
-          .map(
-            (e) => HomeNotificationsCard(
-              title: e.title,
-              content: e.content,
-              imageUrl: e.imageUrl,
-              date: e.date,
+      ...homePageData.notifications.asMap().entries.map(
+            (e) => Dismissible(
+              key: ValueKey(e.key.toString()),
+              onDismissed: (direction) {
+                print(e.key);
+                setState(() {
+                  homePageData.notifications.removeAt(e.key);
+                });
+              },
+              child: HomeNotificationsCard(
+                title: e.value.title,
+                content: e.value.content,
+                imageUrl: e.value.imageUrl,
+                date: e.value.date,
+              ),
             ),
-          )
-          .toList(),
+          ),
     ];
 
     final List<Exam> upcomingExams =
@@ -133,7 +145,7 @@ class UserHomeBody extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Welcome, ${user.firstName}',
+              'Welcome, ${widget.user.firstName}',
               style: GoogleFonts.quicksand(
                 fontSize: 28.0,
                 color: ColorTheme.textDarkGray,

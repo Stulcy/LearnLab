@@ -47,10 +47,13 @@ class _HomeNotificationsCardState extends State<HomeNotificationsCard> {
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  widget.title,
-                  style: GoogleFonts.quicksand(fontSize: 14.0),
+                Expanded(
+                  child: Text(
+                    widget.title,
+                    style: GoogleFonts.quicksand(fontSize: 16.0),
+                  ),
                 ),
                 Text(
                   notificationDate,

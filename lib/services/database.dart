@@ -795,4 +795,15 @@ class DatabaseService {
     }
     await docRef.delete();
   }
+
+  // ---------------------------------------------------------------------------
+  // --- Notifications  --------------------------------------------------------
+  // ---------------------------------------------------------------------------
+
+  Future<void> removeUserNotification(
+      String userUid, String notificationUid) async {
+    await _db.collection('home').doc(userUid).update(
+      {'notifications.$notificationUid': FieldValue.delete()},
+    );
+  }
 }
