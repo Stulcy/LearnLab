@@ -6,6 +6,7 @@ import 'package:learnlab/models/home_data.dart';
 import 'package:learnlab/models/quote.dart';
 import 'package:learnlab/models/user.dart';
 import 'package:learnlab/screens/start/user_screens/home/home_exams_card.dart';
+import 'package:learnlab/screens/start/user_screens/home/home_notifications_card.dart';
 import 'package:learnlab/shared/constants.dart';
 import 'package:learnlab/shared/quotes.dart';
 import 'package:provider/provider.dart';
@@ -18,9 +19,10 @@ class UserHomeBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final HomeData homePageData = Provider.of<HomeData>(context);
+
     final Quote quote = Quotes().getRandomQuote;
 
-    final List<Widget> notificationsWidget = [
+    List<Widget> notificationsWidget = [
       Align(
         alignment: Alignment.centerLeft,
         child: Padding(
@@ -35,13 +37,19 @@ class UserHomeBody extends StatelessWidget {
         ),
       ),
       const Divider(color: Colors.white, thickness: 1.5),
-      Text(
-        'no notifications yet',
-        style: GoogleFonts.quicksand(
-          fontSize: 18.0,
-          color: ColorTheme.textDarkGray,
-        ),
+      SizedBox(
+        height: 10,
       ),
+      ...homePageData.notifications
+          .map(
+            (e) => HomeNotificationsCard(
+              title: e.title,
+              content: e.content,
+              imageUrl: e.imageUrl,
+              date: e.date,
+            ),
+          )
+          .toList(),
     ];
 
     final List<Exam> upcomingExams =

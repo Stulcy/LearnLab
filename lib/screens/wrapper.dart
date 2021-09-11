@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 // 📦 Package imports:
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 // 🌎 Project imports:
@@ -18,6 +19,12 @@ class Wrapper extends StatelessWidget {
     if (user == null) return Authenticate();
 
     // ... otherwise return StartWrapper and update lastActivity
-    return StartWrapper();
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle.dark.copyWith(
+        statusBarColor: Colors.transparent,
+        systemNavigationBarColor: Colors.transparent,
+      ),
+      child: StartWrapper(),
+    );
   }
 }

@@ -277,7 +277,7 @@ class _InformationState extends State<Information> {
                         const SizedBox(height: 10.0),
                         Text(
                           'you can select more courses later',
-                          style: smallTextSyle,
+                          style: smallTextStyle,
                         ),
                         const SizedBox(height: 80.0),
                         MainButton(

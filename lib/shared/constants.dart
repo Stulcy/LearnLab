@@ -101,7 +101,7 @@ final TextStyle burgerTextStyle = GoogleFonts.quicksand(
   color: ColorTheme.textDarkGray,
 );
 
-final TextStyle smallTextSyle = GoogleFonts.quicksand(
+final TextStyle smallTextStyle = GoogleFonts.quicksand(
   fontSize: 14.0,
   color: ColorTheme.textLightGray,
   letterSpacing: 2.0,

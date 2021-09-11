@@ -179,7 +179,7 @@ class _UserCourseCardState extends State<UserCourseCard>
           ),
           Text(
             'long press grade to edit',
-            style: smallTextSyle,
+            style: smallTextStyle,
           ),
         ],
       ),

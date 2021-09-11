@@ -97,7 +97,7 @@ class _SettingsEditDialogState<T> extends State<SettingsEditDialog<T>> {
             const SizedBox(height: 20),
             Text(
               'you will be signed out after changing email',
-              style: smallTextSyle,
+              style: smallTextStyle,
               textAlign: TextAlign.center,
             ),
           ],

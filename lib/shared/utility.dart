@@ -13,7 +13,7 @@ const _months = [
   'December',
 ];
 
-String formatDate(DateTime date) {
+String formatDate(DateTime date, {bool short = false}) {
   final int day = date.day;
   final int month = date.month;
 
@@ -37,5 +37,9 @@ String formatDate(DateTime date) {
       break;
   }
 
-  return '${_months[month - 1]} $day$daySuffix';
+  if (short) {
+    return '${_months[month - 1].substring(0, 3)} $day$daySuffix';
+  } else {
+    return '${_months[month - 1]} $day$daySuffix';
+  }
 }

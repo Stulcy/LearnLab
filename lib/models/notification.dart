@@ -1,0 +1,17 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+class Notification {
+  final String title;
+  final String content;
+  final String imageUrl;
+  final DateTime date;
+
+  const Notification({this.title, this.content, this.imageUrl, this.date});
+
+  Notification.fromJson(Map<String, Object> json)
+      : this(
+            title: json['title'] as String,
+            content: json['content'] as String,
+            imageUrl: json['imageUrl'] as String,
+            date: (json['date'] as Timestamp)?.toDate());
+}
