@@ -1,6 +1,7 @@
 // 🐦 Flutter imports:
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 // 📦 Package imports:
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -94,6 +95,7 @@ class _StartUserState extends State<StartUser> {
     Widget floatingActionButton;
     final AppBar appBar = _currentScreen == UserScreen.home
         ? AppBar(
+            systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.black),
             centerTitle: true,
             backgroundColor: Colors.transparent,
             iconTheme: const IconThemeData(
