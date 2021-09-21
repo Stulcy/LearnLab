@@ -153,7 +153,8 @@ class _AdderState<T> extends State<Adder<T>> {
       ),
       body: Container(
         color: ColorTheme.medium,
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        padding: EdgeInsets.fromLTRB(
+            20.0, 0, 20.0, MediaQuery.of(context).padding.bottom),
         child: Column(
           children: [
             Padding(

@@ -1,7 +1,5 @@
 // 🐦 Flutter imports:
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'dart:io';
 
 // 📦 Package imports:
 import 'package:firebase_analytics/firebase_analytics.dart';

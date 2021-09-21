@@ -13,12 +13,18 @@ class HomeTutorData {
               final String first = data['firstName'] as String;
               final String last = data['lastName'] as String;
 
-              final List<Map<String, Object>> exams =
-                  data.values.whereType<Map<String, Object>>().toList();
+              final Map<String, Object> exams = data;
+              data.removeWhere(
+                  (key, _) => key == 'firstName' || key == 'lastName');
               return MapEntry(key, {
                 'firstName': first,
                 'lastName': last,
-                'exams': exams.map((e) => Exam.fromJson(e)).toList(),
+                'exams': exams.entries
+                    .map((e) => Exam.fromJson(
+                          e.value as Map<String, Object>,
+                          e.key,
+                        ))
+                    .toList(),
               });
             },
           ),

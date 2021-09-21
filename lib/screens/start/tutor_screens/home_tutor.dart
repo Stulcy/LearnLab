@@ -5,7 +5,7 @@ import 'package:learnlab/models/exam.dart';
 import 'package:learnlab/models/home_tutor_data.dart';
 import 'package:learnlab/models/quote.dart';
 import 'package:learnlab/models/user.dart';
-import 'package:learnlab/screens/start/user_screens/home/home_exams_card.dart';
+import 'package:learnlab/shared/exams_card.dart';
 import 'package:learnlab/shared/constants.dart';
 import 'package:learnlab/shared/quotes.dart';
 import 'package:provider/provider.dart';
@@ -56,8 +56,18 @@ class TutorHomeBody extends StatelessWidget {
               uid,
               '${homePageData.userExams[uid]['firstName'] as String} ${homePageData.userExams[uid]['lastName'] as String}'
             ])
-        .toList()
-          ..sort((a, b) => a[1].compareTo(b[1]));
+        // Remove students without exams
+        .where((List<String> e) {
+      final List<Exam> studentExams =
+          homePageData.userExams[e[0]]['exams'] as List<Exam>;
+      int upcoming = 0;
+      for (final Exam e in studentExams) {
+        upcoming += e.daysRemaining >= 0 ? 1 : 0;
+      }
+
+      return upcoming > 0;
+    }).toList()
+      ..sort((a, b) => a[1].compareTo(b[1]));
 
     final List<Widget> examsWidget = [
       Align(
@@ -93,7 +103,7 @@ class TutorHomeBody extends StatelessWidget {
                               as List<Exam>)
                           .where((exam) => exam.daysRemaining >= 0)
                           .toList()
-                            ..sort()),
+                        ..sort()),
                 ],
               ))
           .toList(),

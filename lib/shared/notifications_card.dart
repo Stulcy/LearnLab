@@ -55,6 +55,7 @@ class _HomeNotificationsCardState extends State<HomeNotificationsCard> {
                     style: GoogleFonts.quicksand(fontSize: 16.0),
                   ),
                 ),
+                SizedBox(width: 10),
                 Text(
                   notificationDate,
                   style: smallTextStyle.copyWith(

@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:learnlab/models/tutor_list_data.dart';
 import 'package:learnlab/models/user.dart';
 import 'package:learnlab/models/user_course.dart';
+import 'package:learnlab/models/user_exam.dart';
 import 'package:learnlab/models/user_tutor.dart';
 import 'package:learnlab/screens/start/user_screens/tutors/user_tutor_card.dart';
 import 'package:learnlab/shared/adder.dart';
 import 'package:learnlab/shared/constants.dart';
 import 'package:learnlab/services/database.dart';
 import 'package:learnlab/shared/loading.dart';
-import 'package:learnlab/shared/pop_up.dart';
 import 'package:provider/provider.dart';
 
 class UserTutorsBody extends StatelessWidget {
@@ -81,6 +81,7 @@ class UserTutorsFAB extends StatelessWidget {
   Widget build(BuildContext context) {
     final userTutors =
         Provider.of<List<UserTutor>>(context)?.map((e) => e.tutorUid) ?? [];
+    final userExams = Provider.of<List<UserExam>>(context) ?? [];
     final userCourses = Provider.of<List<UserCourse>>(context);
 
     return FloatingActionButton(
@@ -99,7 +100,7 @@ class UserTutorsFAB extends StatelessWidget {
                     .where((element) => !userTutors.contains(element.uid))
                     .toList(),
                 onSubmitted: (TutorListData selected) {
-                  _db.addUserTutor(user, selected, userCourses);
+                  _db.addUserTutor(user, selected, userCourses, userExams);
                 },
               );
             },

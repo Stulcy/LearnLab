@@ -1,5 +1,6 @@
 // 🐦 Flutter imports:
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 // 📦 Package imports:
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -72,6 +73,7 @@ class _StartTutorState extends State<StartTutor> {
     Widget floatingActionButton;
     final AppBar appBar = _currentScreen == TutorScreen.home
         ? AppBar(
+            systemOverlayStyle: SystemUiOverlayStyle.dark,
             centerTitle: true,
             backgroundColor: Colors.transparent,
             iconTheme: const IconThemeData(
@@ -134,7 +136,13 @@ class _StartTutorState extends State<StartTutor> {
             : ColorTheme.lightGray,
         appBar: appBar,
         floatingActionButton: floatingActionButton,
-        body: body,
+        body: Padding(
+          padding: EdgeInsets.only(
+              bottom: _currentScreen != TutorScreen.home
+                  ? MediaQuery.of(context).padding.bottom
+                  : 0),
+          child: body,
+        ),
         drawer: SizedBox(
           width: 0.7 * screenWidth,
           child: Drawer(

@@ -8,6 +8,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 
 // 🌎 Project imports:
 import 'package:learnlab/models/course_list_data.dart';
+import 'package:learnlab/models/exam.dart';
 import 'package:learnlab/models/tutor_list_data.dart';
 import 'package:learnlab/models/user_exam.dart';
 import 'package:learnlab/models/user.dart';
@@ -753,8 +754,8 @@ class DatabaseService {
   /// [user.uid], first name [user.firstName], last name [user.lastName] and
   /// courses [userCourses]. User's avatar URL is [user.image] and tutor's
   /// avatar URL is read from the database.
-  Future<void> addUserTutor(
-      UserData user, TutorListData tutor, List<UserCourse> userCourses) async {
+  Future<void> addUserTutor(UserData user, TutorListData tutor,
+      List<UserCourse> userCourses, List<UserExam> userExams) async {
     final String tutorImage = await _getUserAvatar(tutor.uid);
     await _db.collection('user_tutors').add({
       'userUid': user.uid,
@@ -770,14 +771,27 @@ class DatabaseService {
     });
 
     // Add user entry to tutor's userExams in home
-    await _db.collection('home').doc(tutor.uid).set({
+    Map<String, Map<String, Map<String, Object>>> newData = {
       'userExams': {
         user.uid: {
           'firstName': user.firstName,
           'lastName': user.lastName,
         },
       },
-    }, SetOptions(merge: true));
+    };
+
+    // Add existing exams to tutor home data
+    for (final UserExam e in userExams) {
+      newData['userExams'][user.uid][e.documentUid] = {
+        'courseName': e.fullName,
+        'date': e.date,
+      };
+    }
+
+    await _db
+        .collection('home')
+        .doc(tutor.uid)
+        .set(newData, SetOptions(merge: true));
   }
 
   /// Remove document with uid [documentUid] which represent a user saved tutor

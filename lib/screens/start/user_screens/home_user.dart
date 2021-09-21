@@ -5,8 +5,9 @@ import 'package:learnlab/models/exam.dart';
 import 'package:learnlab/models/home_data.dart';
 import 'package:learnlab/models/quote.dart';
 import 'package:learnlab/models/user.dart';
-import 'package:learnlab/screens/start/user_screens/home/home_exams_card.dart';
-import 'package:learnlab/screens/start/user_screens/home/home_notifications_card.dart';
+import 'package:learnlab/services/database.dart';
+import 'package:learnlab/shared/exams_card.dart';
+import 'package:learnlab/shared/notifications_card.dart';
 import 'package:learnlab/shared/constants.dart';
 import 'package:learnlab/shared/quotes.dart';
 import 'package:provider/provider.dart';
@@ -45,23 +46,20 @@ class _UserHomeBodyState extends State<UserHomeBody> {
       SizedBox(
         height: 10,
       ),
-      ...homePageData.notifications.asMap().entries.map(
-            (e) => Dismissible(
-              key: ValueKey(e.key.toString()),
-              onDismissed: (direction) {
-                print(e.key);
-                setState(() {
-                  homePageData.notifications.removeAt(e.key);
-                });
-              },
-              child: HomeNotificationsCard(
-                title: e.value.title,
-                content: e.value.content,
-                imageUrl: e.value.imageUrl,
-                date: e.value.date,
-              ),
-            ),
+      ...homePageData.notifications.map(
+        (e) => Dismissible(
+          key: ValueKey(e.id),
+          onDismissed: (direction) {
+            DatabaseService().removeUserNotification(widget.user.uid, e.id);
+          },
+          child: HomeNotificationsCard(
+            title: e.title,
+            content: e.content,
+            imageUrl: e.imageUrl,
+            date: e.date,
           ),
+        ),
+      ),
     ];
 
     final List<Exam> upcomingExams =

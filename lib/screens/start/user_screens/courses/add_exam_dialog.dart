@@ -60,8 +60,6 @@ class _AddExamDialogState extends State<AddExamDialog> {
             ),
           ),
           child: CupertinoDatePicker(
-            minimumYear: _currentYear,
-            maximumYear: _currentYear + 1,
             initialDateTime: _dateTime,
             mode: CupertinoDatePickerMode.date,
             onDateTimeChanged: (dateTime) => {

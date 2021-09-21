@@ -1,5 +1,6 @@
 // 🐦 Flutter imports:
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 // 📦 Package imports:
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -99,6 +100,7 @@ class _StartAdminState extends State<StartAdmin> {
           : ColorTheme.lightGray,
       appBar: _currentScreen == AdminScreen.home
           ? AppBar(
+              systemOverlayStyle: SystemUiOverlayStyle.dark,
               centerTitle: true,
               backgroundColor: Colors.transparent,
               iconTheme: const IconThemeData(
@@ -242,7 +244,10 @@ class _StartAdminState extends State<StartAdmin> {
           ),
         ),
       ),
-      body: body,
+      body: Padding(
+        padding: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
+        child: body,
+      ),
     );
   }
 }

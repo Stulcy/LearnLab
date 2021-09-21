@@ -469,7 +469,11 @@ class _SettingsState extends State<Settings> {
       child: Scaffold(
         backgroundColor: ColorTheme.lightGray,
         appBar: appBar,
-        body: body,
+        body: Padding(
+          padding:
+              EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
+          child: body,
+        ),
       ),
     );
   }

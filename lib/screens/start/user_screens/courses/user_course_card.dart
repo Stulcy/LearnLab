@@ -15,7 +15,7 @@ import 'package:learnlab/screens/start/user_screens/courses/courses_chart.dart';
 import 'package:learnlab/shared/pop_up.dart';
 import 'package:learnlab/shared/progress_bar.dart';
 
-import 'package:learnlab/screens/start/user_screens/exams/add_exam_dialog.dart';
+import 'package:learnlab/screens/start/user_screens/courses/add_exam_dialog.dart';
 
 enum GradeType { normal, min, max }
 
@@ -260,7 +260,7 @@ class _UserCourseCardState extends State<UserCourseCard>
                   child: Text(
                     widget.course.fullName,
                     style: GoogleFonts.quicksand(
-                      fontSize: 28.0,
+                      fontSize: 22.0,
                     ),
                   ),
                 ),

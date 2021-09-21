@@ -11,7 +11,7 @@ import 'package:learnlab/models/user_exam.dart';
 import 'package:learnlab/models/user_tutor.dart';
 import 'package:learnlab/screens/start/shared_screens/settings.dart';
 import 'package:learnlab/screens/start/user_screens/exams/exams_user.dart';
-import 'package:learnlab/screens/start/user_screens/home/home_user.dart';
+import 'package:learnlab/screens/start/user_screens/home_user.dart';
 import 'package:learnlab/screens/start/user_screens/overview_user.dart';
 import 'package:provider/provider.dart';
 
@@ -57,7 +57,6 @@ class StartUser extends StatefulWidget {
 class _StartUserState extends State<StartUser> {
   UserScreen _currentScreen = UserScreen.home;
   final AuthService _auth = AuthService();
-  FirebaseMessaging messaging;
 
   UserData user;
 
@@ -65,10 +64,6 @@ class _StartUserState extends State<StartUser> {
   void initState() {
     super.initState();
     user = widget._user;
-    messaging = FirebaseMessaging.instance;
-    messaging.getToken().then((value) {
-      print(value);
-    });
     FirebaseMessaging.onMessage.listen((RemoteMessage event) {
       print("message recieved");
       print(event.notification.body);
@@ -95,7 +90,7 @@ class _StartUserState extends State<StartUser> {
     Widget floatingActionButton;
     final AppBar appBar = _currentScreen == UserScreen.home
         ? AppBar(
-            systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.black),
+            systemOverlayStyle: SystemUiOverlayStyle.dark,
             centerTitle: true,
             backgroundColor: Colors.transparent,
             iconTheme: const IconThemeData(
@@ -175,7 +170,13 @@ class _StartUserState extends State<StartUser> {
             : ColorTheme.lightGray,
         appBar: appBar,
         floatingActionButton: floatingActionButton,
-        body: body,
+        body: Padding(
+          padding: EdgeInsets.only(
+              bottom: _currentScreen != UserScreen.home
+                  ? MediaQuery.of(context).padding.bottom
+                  : 0),
+          child: body,
+        ),
         drawer: SizedBox(
           width: 0.7 * screenWidth,
           child: Drawer(

@@ -52,7 +52,6 @@ let sendNotification = async (examData, tokens, days) => {
     // Read token, if not saved already
     if (!tokens[examData["userUid"]]) {
         tokens[examData["userUid"]] = await getUserToken(examData["userUid"]);
-        console.log("grabbed");
     }
 
     let title = "Upcoming " + examData["courseName"] + " exam";
@@ -82,12 +81,10 @@ let sendNotification = async (examData, tokens, days) => {
 };
 
 let sendExamNotifications = async () => {
-    console.log("kva");
     const neki = await db
         .collection("home")
         .doc("NevyTUvU92Sod9zpzFbgJ5qXjTC2")
         .get();
-    console.log(neki.data());
 
     const tokens = {};
 
@@ -132,7 +129,7 @@ let sendExamNotifications = async () => {
         .where("date", "<", in7daysUpper)
         .get();
 
-    console.log("7 dni\n\n");
+    console.log("7 dni");
     // Posles za cez 1 tedn
     snapshot7days.forEach(async (doc) => {
         await sendNotification(doc.data(), tokens, 7);
@@ -144,7 +141,7 @@ let sendExamNotifications = async () => {
         .where("date", "<", in3daysUpper)
         .get();
 
-    console.log("3 dni\n\n");
+    console.log("3 dni");
     // Posles za cez 3 dni
     snapshot3days.forEach(async (doc) => {
         await sendNotification(doc.data(), tokens, 3);
@@ -156,14 +153,11 @@ let sendExamNotifications = async () => {
         .where("date", "<", in1dayUpper)
         .get();
 
-    console.log("1 dan\n\n");
+    console.log("1 dan");
     // Posles za cez 1 tedn
     snapshot1day.forEach(async (doc) => {
         await sendNotification(doc.data(), tokens, 1);
     });
-
-    console.log(tokens);
 };
 
 sendExamNotifications();
-console.log("did some nice shit");

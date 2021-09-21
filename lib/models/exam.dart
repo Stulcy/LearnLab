@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Exam extends Comparable<Exam> {
+  final String id;
   final String courseFullName;
   final DateTime examDate;
 
@@ -12,10 +13,15 @@ class Exam extends Comparable<Exam> {
         .inDays;
   }
 
-  Exam({@required this.courseFullName, @required this.examDate});
+  Exam({
+    @required this.id,
+    @required this.courseFullName,
+    @required this.examDate,
+  });
 
-  Exam.fromJson(Map<String, Object> json)
+  Exam.fromJson(Map<String, Object> json, String uid)
       : this(
+          id: uid,
           courseFullName: json['courseName'] as String,
           examDate: (json['date'] as Timestamp)?.toDate(),
         );

@@ -4,9 +4,18 @@ import 'package:learnlab/models/quote.dart';
 
 class Quotes {
   static final generator = Random();
+  static DateTime lastUsed;
+  static Quote lastQuote;
 
   Quote get getRandomQuote {
-    return quotesList[generator.nextInt(quotesList.length)];
+    // Generate new quote if this is the first request or if it has been
+    // more than 5 minutes since previous request
+    if (lastQuote == null ||
+        DateTime.now().difference(lastUsed).inMinutes >= 5) {
+      lastUsed = DateTime.now();
+      lastQuote = quotesList[generator.nextInt(quotesList.length)];
+    }
+    return lastQuote;
   }
 
   static const List<Quote> quotesList = [
