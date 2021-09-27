@@ -59,7 +59,7 @@ class UserExamsBody extends StatelessWidget {
             SizedBox(
               width: screenWidth * 0.5,
               child: Text(
-                "I can't remind you for exams, if Y don't know when you have them.",
+                "I can't remind you for exams, if you don't know when you have them.",
                 style: textTextStyle.copyWith(fontSize: 18),
                 textAlign: TextAlign.center,
               ),

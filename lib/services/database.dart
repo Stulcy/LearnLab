@@ -9,6 +9,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 // 🌎 Project imports:
 import 'package:learnlab/models/course_list_data.dart';
 import 'package:learnlab/models/exam.dart';
+import 'package:learnlab/models/stats.dart';
 import 'package:learnlab/models/tutor_list_data.dart';
 import 'package:learnlab/models/user_exam.dart';
 import 'package:learnlab/models/user.dart';

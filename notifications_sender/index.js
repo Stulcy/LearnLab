@@ -81,11 +81,7 @@ let sendNotification = async (examData, tokens, days) => {
 };
 
 let sendExamNotifications = async () => {
-    const neki = await db
-        .collection("home")
-        .doc("NevyTUvU92Sod9zpzFbgJ5qXjTC2")
-        .get();
-
+    let sentNotificationsCount = 0;
     const tokens = {};
 
     // Today's date
@@ -133,6 +129,7 @@ let sendExamNotifications = async () => {
     // Posles za cez 1 tedn
     snapshot7days.forEach(async (doc) => {
         await sendNotification(doc.data(), tokens, 7);
+        ++sentNotificationsCount;
     });
 
     // Izpiti cez 3 dni
@@ -145,6 +142,7 @@ let sendExamNotifications = async () => {
     // Posles za cez 3 dni
     snapshot3days.forEach(async (doc) => {
         await sendNotification(doc.data(), tokens, 3);
+        ++sentNotificationsCount;
     });
 
     // Izpiti cez 1 dan
@@ -157,7 +155,10 @@ let sendExamNotifications = async () => {
     // Posles za cez 1 tedn
     snapshot1day.forEach(async (doc) => {
         await sendNotification(doc.data(), tokens, 1);
+        ++sentNotificationsCount;
     });
+
+    console.log(sentNotificationsCount);
 };
 
 sendExamNotifications();

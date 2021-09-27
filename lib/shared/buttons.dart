@@ -199,6 +199,17 @@ class _NumberButtonsGroupState extends State<NumberButtonsGroup> {
           i * perLine, min((i + 1) * perLine, children.length)));
     }
 
+    // Add missing Widgets in the last line
+    widgetLines[widget.lines - 1] = [
+      ...(widgetLines[widget.lines - 1]),
+      ...List.filled(
+        perLine - widgetLines[widget.lines - 1].length,
+        SizedBox(
+          width: 2 * widget.radius,
+        ),
+      ),
+    ];
+
     return widget.vertical
         ? Row(
             children: widgetLines

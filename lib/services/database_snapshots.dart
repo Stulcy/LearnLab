@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:learnlab/models/home_data.dart';
 import 'package:learnlab/models/home_tutor_data.dart';
 import 'package:learnlab/models/overview_course.dart';
+import 'package:learnlab/models/stats.dart';
 
 // 🌎 Project imports:
 import 'package:learnlab/models/user_course.dart';
@@ -130,5 +131,17 @@ class SnapshotService {
 
   HomeTutorData _homeTutorDataFromSnapshot(DocumentSnapshot snapshot) {
     return HomeTutorData.fromJson(snapshot.data() as Map<String, Object>);
+  }
+
+  Stream<Stats> get stats {
+    return _db
+        .collection('data')
+        .doc('stats')
+        .snapshots()
+        .map(_statsFromSnapshot);
+  }
+
+  Stats _statsFromSnapshot(DocumentSnapshot snapshot) {
+    return Stats.fromJson(snapshot.data() as Map<String, Object>);
   }
 }

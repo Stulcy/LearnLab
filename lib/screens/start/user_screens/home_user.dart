@@ -52,7 +52,7 @@ class _UserHomeBodyState extends State<UserHomeBody> {
           onDismissed: (direction) {
             DatabaseService().removeUserNotification(widget.user.uid, e.id);
           },
-          child: HomeNotificationsCard(
+          child: NotificationsCard(
             title: e.title,
             content: e.content,
             imageUrl: e.imageUrl,

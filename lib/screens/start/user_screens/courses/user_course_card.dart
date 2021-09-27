@@ -121,11 +121,13 @@ class _UserCourseCardState extends State<UserCourseCard>
 
     // Create placeholder if no grades
     if (gradesWidgets.isEmpty) {
-      gradesWidgets.add(Text(
-        'no grades',
-        style: GoogleFonts.quicksand(
-          fontSize: 24.0,
-          fontStyle: FontStyle.italic,
+      gradesWidgets.add(Padding(
+        padding: const EdgeInsets.only(left: 9.0),
+        child: Text(
+          'no grades',
+          style: GoogleFonts.quicksand(
+            fontSize: 20.0,
+          ),
         ),
       ));
     }
@@ -245,22 +247,22 @@ class _UserCourseCardState extends State<UserCourseCard>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
                 padding: const EdgeInsets.only(bottom: 8.0),
-                decoration: const BoxDecoration(
+                /* decoration: const BoxDecoration(
                   border: Border(
                     bottom: BorderSide(),
                   ),
-                ),
+                ), */
                 child: SizedBox(
                   width: screenWidth - 120,
                   child: Text(
                     widget.course.fullName,
                     style: GoogleFonts.quicksand(
-                      fontSize: 22.0,
+                      fontSize: 24.0,
                     ),
                   ),
                 ),

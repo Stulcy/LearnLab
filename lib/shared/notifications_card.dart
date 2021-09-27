@@ -3,13 +3,13 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:learnlab/shared/constants.dart';
 import 'package:learnlab/shared/utility.dart';
 
-class HomeNotificationsCard extends StatefulWidget {
+class NotificationsCard extends StatefulWidget {
   final String title;
   final String content;
   final DateTime date;
   final String imageUrl;
 
-  const HomeNotificationsCard({
+  const NotificationsCard({
     Key key,
     this.title,
     this.content,
@@ -18,10 +18,10 @@ class HomeNotificationsCard extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _HomeNotificationsCardState createState() => _HomeNotificationsCardState();
+  _NotificationsCardState createState() => _NotificationsCardState();
 }
 
-class _HomeNotificationsCardState extends State<HomeNotificationsCard> {
+class _NotificationsCardState extends State<NotificationsCard> {
   bool expanded = false;
 
   @override

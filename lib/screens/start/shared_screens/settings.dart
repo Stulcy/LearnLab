@@ -298,6 +298,13 @@ class _SettingsState extends State<Settings> {
                             const CropAspectRatio(ratioX: 1, ratioY: 1),
                         maxHeight: 512,
                         maxWidth: 512,
+                        androidUiSettings: AndroidUiSettings(
+                          toolbarColor: ColorTheme.medium,
+                          backgroundColor: Colors.white,
+                          dimmedLayerColor: ColorTheme.darkGray,
+                          showCropGrid: false,
+                          hideBottomControls: true,
+                        ),
                       );
 
                       if (croppedImage != null) {
@@ -415,25 +422,35 @@ class _SettingsState extends State<Settings> {
                 overscroll.disallowGlow();
                 return;
               },
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(40, 30, 40, 20),
-                  child: Column(
-                    children: [
-                      Text(
-                        'profile settings',
-                        style: titleTextStyle,
+              child: Stack(
+                children: [
+                  SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(40, 30, 40, 20),
+                      child: Column(
+                        children: [
+                          Text(
+                            'profile settings',
+                            style: titleTextStyle,
+                          ),
+                          profileSettings,
+                          Text(
+                            'account settings',
+                            style: titleTextStyle,
+                          ),
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: accountSettings,
+                          ),
+                        ],
                       ),
-                      profileSettings,
-                      Text(
-                        'account settings',
-                        style: titleTextStyle,
-                      ),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: accountSettings,
-                      ),
-                      MainButton(
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(40, 30, 40, 40),
+                      child: MainButton(
                         onPressed: () {
                           // If user changes email, we need to re-auth
                           if (email != widget.user.email) {
@@ -454,9 +471,9 @@ class _SettingsState extends State<Settings> {
                         width: double.infinity,
                         height: 42.0,
                       ),
-                    ],
+                    ),
                   ),
-                ),
+                ],
               ),
             ),
           ),

@@ -16,8 +16,8 @@ class TutorCourseCard extends StatelessWidget {
     final double screenWidth = MediaQuery.of(context).size.width;
 
     final Widget deleteIcon = SizedBox(
-      width: 36,
-      height: 36,
+      width: 28,
+      height: 28,
       child: Material(
         color: Colors.transparent,
         child: InkWell(
@@ -50,16 +50,16 @@ class TutorCourseCard extends StatelessWidget {
                   );
                 });
           },
-          child: const Icon(Icons.clear),
+          child: const Icon(Icons.clear, size: 20.0),
         ),
       ),
     );
 
     return Container(
-      padding: const EdgeInsets.all(20.0),
+      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0),
       color: Colors.white,
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
@@ -69,7 +69,7 @@ class TutorCourseCard extends StatelessWidget {
               child: Text(
                 course.fullName,
                 style: GoogleFonts.quicksand(
-                  fontSize: 22.0,
+                  fontSize: 20.0,
                 ),
               ),
             ),
