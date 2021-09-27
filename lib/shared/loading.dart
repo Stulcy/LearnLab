@@ -8,15 +8,14 @@ class Loader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Get screen height and calculate logo size
-    final double screenHeight = MediaQuery.of(context).size.height;
-    final double imageHeight = 0.3 * screenHeight;
+    final double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       backgroundColor: ColorTheme.medium,
       body: Center(
         child: Image(
           image: const AssetImage('assets/images/logo_white_anim.gif'),
-          height: imageHeight,
+          height: 0.4 * screenWidth,
         ),
       ),
     );

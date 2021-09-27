@@ -69,7 +69,7 @@ class TutorCourseCard extends StatelessWidget {
               child: Text(
                 course.fullName,
                 style: GoogleFonts.quicksand(
-                  fontSize: 28.0,
+                  fontSize: 22.0,
                 ),
               ),
             ),
