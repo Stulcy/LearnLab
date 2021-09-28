@@ -73,6 +73,8 @@ class DatabaseService {
     await _db.collection('user_overview').doc(user.uid).set({'courses': {}});
     // Add user document in collection home
     await _db.collection('home').doc(user.uid).set({'exams': {}});
+    // Update stats
+    await incrementUser(1, false);
   }
 
   // Update user information with new data
@@ -154,6 +156,9 @@ class DatabaseService {
 
       // Remove user overview
       await _db.collection('user_overview').doc(uid).delete();
+
+      // Update stats
+      await incrementUser(-1, false);
 
       // Remove user avatar if present
       try {
@@ -245,6 +250,9 @@ class DatabaseService {
               .update({'tutorFirstName': firstName, 'tutorLastName': lastName});
         }
       });
+
+      // Update stats
+      await incrementUser(1, true);
       return true;
     } catch (e) {
       print(e);
@@ -293,6 +301,9 @@ class DatabaseService {
         await _removeSavedTutor(uid);
 
         await _db.collection('home').doc(uid).delete();
+
+        // Update stats
+        await incrementUser(-1, true);
 
         try {
           await FirebaseStorage.instance
@@ -820,5 +831,16 @@ class DatabaseService {
     await _db.collection('home').doc(userUid).update(
       {'notifications.$notificationUid': FieldValue.delete()},
     );
+  }
+
+  // ---------------------------------------------------------------------------
+  // --- Stats  ----------------------------------------------------------------
+  // ---------------------------------------------------------------------------
+
+  Future<void> incrementUser(int change, bool tutor) async {
+    final docRef = _db.collection('data').doc('stats');
+    final attribute = tutor ? 'tutors' : 'students';
+    final data = (await docRef.get()).data()[attribute];
+    docRef.update({attribute: data + change});
   }
 }

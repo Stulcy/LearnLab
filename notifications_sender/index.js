@@ -22,7 +22,7 @@ function makeid(length) {
     return result;
 }
 
-let writeNotification = async (userUid, title, content, date) => {
+let writeNotification = async(userUid, title, content, date) => {
     const newNotif = {
         title: title,
         content: content,
@@ -32,22 +32,19 @@ let writeNotification = async (userUid, title, content, date) => {
     await db
         .collection("home")
         .doc(userUid)
-        .set(
-            {
-                notifications: {
-                    [notifUid]: newNotif,
-                },
+        .set({
+            notifications: {
+                [notifUid]: newNotif,
             },
-            { merge: true }
-        );
+        }, { merge: true });
 };
 
-let getUserToken = async (userUid) => {
+let getUserToken = async(userUid) => {
     const docRef = db.collection("users").doc(userUid);
     return (await docRef.get()).data()["token"];
 };
 
-let sendNotification = async (examData, tokens, days) => {
+let sendNotification = async(examData, tokens, days) => {
     console.log("sending to user " + examData["userUid"]);
     // Read token, if not saved already
     if (!tokens[examData["userUid"]]) {
@@ -80,7 +77,7 @@ let sendNotification = async (examData, tokens, days) => {
     fcm.send(message);
 };
 
-let sendExamNotifications = async () => {
+let sendExamNotifications = async() => {
     let sentNotificationsCount = 0;
     const tokens = {};
 
@@ -127,7 +124,7 @@ let sendExamNotifications = async () => {
 
     console.log("7 dni");
     // Posles za cez 1 tedn
-    snapshot7days.forEach(async (doc) => {
+    snapshot7days.forEach(async(doc) => {
         await sendNotification(doc.data(), tokens, 7);
         ++sentNotificationsCount;
     });
@@ -140,7 +137,7 @@ let sendExamNotifications = async () => {
 
     console.log("3 dni");
     // Posles za cez 3 dni
-    snapshot3days.forEach(async (doc) => {
+    snapshot3days.forEach(async(doc) => {
         await sendNotification(doc.data(), tokens, 3);
         ++sentNotificationsCount;
     });
@@ -153,11 +150,12 @@ let sendExamNotifications = async () => {
 
     console.log("1 dan");
     // Posles za cez 1 tedn
-    snapshot1day.forEach(async (doc) => {
+    snapshot1day.forEach(async(doc) => {
         await sendNotification(doc.data(), tokens, 1);
         ++sentNotificationsCount;
     });
 
+    //await db.collection("data").doc("stats").update({ sentNotificationsCount: sendExamNotifications });
     console.log(sentNotificationsCount);
 };
 

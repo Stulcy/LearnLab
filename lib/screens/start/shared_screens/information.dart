@@ -225,7 +225,8 @@ class _InformationState extends State<Information> {
           child: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(30.0, 60.0, 30.0, 30.0),
+              padding: EdgeInsets.fromLTRB(30.0, 60.0, 30.0,
+                  30.0 + MediaQuery.of(context).padding.bottom),
               child: Column(
                 children: [
                   Form(
