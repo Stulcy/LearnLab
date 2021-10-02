@@ -71,6 +71,9 @@ class _StartUserState extends State<StartUser> {
     FirebaseMessaging.onMessageOpenedApp.listen((message) {
       print('Message clicked!');
     });
+
+    FirebaseMessaging.instance.requestPermission();
+    
   }
 
   Function _createOnPressed(UserScreen screen) {
