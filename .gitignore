@@ -47,3 +47,5 @@ app.*.map.json
 
 # Notifications script NodeJS
 /notifications_sender/node_modules
+
+/notifications_sender/admin_key.json
