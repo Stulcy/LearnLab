@@ -4,6 +4,9 @@ Flutter project created for a startup. App allows students to store exam dates, 
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+- make sure you have a working emulator (Android or iOS)
+- install Flutter SDK
+- if you are working in VS Code, install Dart and Flutter extension
+- start the app with "flutter run"
 
 
