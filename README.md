@@ -9,4 +9,14 @@ First flutter project created for a startup. App allows students to store exam d
 - if you are working in VS Code, install Dart and Flutter extension
 - start the app with "flutter run"
 
+## App images
+
+![alt text](https://github.com/Stulcy/LearnLab/blob/main/README_images/splash.png?raw=true)
+![alt text](https://github.com/Stulcy/LearnLab/blob/main/README_images/sign_in.png?raw=true)
+![alt text](https://github.com/Stulcy/LearnLab/blob/main/README_images/home.png?raw=true)
+![alt text](https://github.com/Stulcy/LearnLab/blob/main/README_images/add_course.png?raw=true)
+![alt text](https://github.com/Stulcy/LearnLab/blob/main/README_images/courses.png?raw=true)
+![alt text](https://github.com/Stulcy/LearnLab/blob/main/README_images/colleges.png?raw=true)
+![alt text](https://github.com/Stulcy/LearnLab/blob/main/README_images/tutors.png?raw=true)
+
 
